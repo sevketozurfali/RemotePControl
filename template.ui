@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1023</width>
+    <height>477</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="0">
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>1</number>
+         </property>
+         <widget class="QWidget" name="power_utilities">
+          <attribute name="title">
+           <string>Tab 1</string>
+          </attribute>
+          <widget class="QFrame" name="f_cpu">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>90</y>
+             <width>281</width>
+             <height>261</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+          </widget>
+          <widget class="QFrame" name="f_battery">
+           <property name="geometry">
+            <rect>
+             <x>290</x>
+             <y>90</y>
+             <width>361</width>
+             <height>261</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+          </widget>
+          <widget class="QFrame" name="f_ram">
+           <property name="geometry">
+            <rect>
+             <x>660</x>
+             <y>90</y>
+             <width>321</width>
+             <height>261</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="sound_utilities">
+          <attribute name="title">
+           <string>Tab 2</string>
+          </attribute>
+          <widget class="QFrame" name="f_sound_source">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>130</y>
+             <width>331</width>
+             <height>221</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QComboBox" name="combi_sound_output">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>20</y>
+              <width>291</width>
+              <height>33</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QFrame" name="f_media_player">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>130</y>
+             <width>321</width>
+             <height>221</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QPushButton" name="btn_play_pause">
+            <property name="geometry">
+             <rect>
+              <x>110</x>
+              <y>80</y>
+              <width>88</width>
+              <height>33</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Play/Pause</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QFrame" name="f_volume_control">
+           <property name="geometry">
+            <rect>
+             <x>650</x>
+             <y>130</y>
+             <width>331</width>
+             <height>221</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QPushButton" name="btn_volume_up">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>20</y>
+              <width>131</width>
+              <height>33</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Volume UP + </string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btn_volume_mute">
+            <property name="geometry">
+             <rect>
+              <x>110</x>
+              <y>150</y>
+              <width>88</width>
+              <height>33</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mute</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btn_volume_down">
+            <property name="geometry">
+             <rect>
+              <x>167</x>
+              <y>20</y>
+              <width>121</width>
+              <height>33</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Volume Down -</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="control_utilities">
+          <attribute name="title">
+           <string>Page</string>
+          </attribute>
+          <widget class="QFrame" name="f_qr_code">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>90</y>
+             <width>301</width>
+             <height>261</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLabel" name="lbl_qr_code">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>0</y>
+              <width>291</width>
+              <height>181</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>QR Code is in here</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btn_refresh_server">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>190</y>
+              <width>231</width>
+              <height>33</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Refresh</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QFrame" name="f_pc_controls">
+           <property name="geometry">
+            <rect>
+             <x>300</x>
+             <y>90</y>
+             <width>291</width>
+             <height>261</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLineEdit" name="line_password">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>30</y>
+              <width>251</width>
+              <height>33</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLabel" name="lbl_password">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>10</y>
+              <width>71</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Password</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btn_pc_shutdown">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>110</y>
+              <width>251</width>
+              <height>33</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>ShutDown</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btn_pc_reset">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>140</y>
+              <width>251</width>
+              <height>33</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Reset</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btn_pc_suspend">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>170</y>
+              <width>251</width>
+              <height>33</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Suspend</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btn_pc_lock">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>200</y>
+              <width>251</width>
+              <height>33</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Lock</string>
+            </property>
+           </widget>
+           <widget class="QCheckBox" name="chckbox_remember">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>70</y>
+              <width>241</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Remember</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QFrame" name="f_about">
+           <property name="geometry">
+            <rect>
+             <x>590</x>
+             <y>90</y>
+             <width>391</width>
+             <height>261</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLabel" name="lbl_about">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>371</width>
+              <height>241</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>About</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1023</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
