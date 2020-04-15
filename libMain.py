@@ -20,6 +20,28 @@ class libMain:
         self.server.conn_listen()
 
     def find_sound_devices(self):
-        pulse = pulsectl.Pulse("t")
-        device_list = pulse.sink_list()
-        print("Device list : {}" , device_list)
+        self.pulse = pulsectl.Pulse("t")
+        self.device_list = self.pulse.sink_list()
+        print("Device list : {}" , self.device_list)
+        return self.device_list
+
+    def set_sound_output(self,sound_output_index):
+        print("Sound ouptut index : " ,sound_output_index)
+        self.selected_output_index = sound_output_index
+        # self.pulse.sink_default_set(self.device_list[0])
+        # self.pulse.sink_input_move()
+        # self.pulse.sink_default_set(self.pulse.sink_list()[0])
+        # self.pulse.sink_default_set(sound_output_index)
+    
+    def set_sound_mute(self):
+        self.device_list = self.pulse.sink_list()
+        print("selected device : ", self.selected_output_index)
+        print("mute : ", self.device_list[self.selected_output_index].mute)
+        if int(self.device_list[self.selected_output_index].mute) == 1:
+            self.pulse.mute(self.device_list[self.selected_output_index], False)
+        else:
+            self.pulse.mute(self.device_list[self.selected_output_index], True)
+
+
+    def decrease_sound_volume(self):
+        print("input info : " , str(self.pulse.sink_input_info()))

@@ -1,10 +1,6 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'template.ui'
-#
 # Created by: PyQt5 UI code generator 5.14.2
-#
-# WARNING! All changes made in this file will be lost!
+# author : Sevket Ozurfali
+# Email : sevketozurfali@gmail.com
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -19,6 +15,7 @@ class Ui_MainWindow(object):
         super(Ui_MainWindow,self).__init__()
         self.pool = QtCore.QThreadPool.globalInstance()
         self.pool.setMaxThreadCount(3)
+        self.sound_output_indexes = []
 
     # .........................................................................................
 
@@ -167,7 +164,9 @@ class Ui_MainWindow(object):
         #connections...........................................................
         self.btn_play_pause.clicked.connect(self.working_worker)
         self.tabWidget.currentChanged.connect(self.working_worker)
-        #QtCore.QObject.connect(self.tabWidget, QtCore.SIGNAL('tabChanged'), self.working_worker)
+        self.combi_sound_output.currentIndexChanged.connect(self.slot_changed_media_output)
+        self.btn_volume_mute.clicked.connect(self.slot_mute)
+        self.btn_volume_down.clicked.connect(self.slot_decrease_volume)
 
         #......................................................................
         
@@ -200,16 +199,33 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(0, "Power")
         self.tabWidget.setTabText(1, "Media")
         self.tabWidget.setTabText(2, "System")
+        self.initialization()
         
     def initialization(self):
-        self.client.find_sound_devices()
-        self.client.start_server()
+        for item in self.client.find_sound_devices():
+            self.combi_sound_output.addItem(item.description)
+            self.sound_output_indexes.append(item.index)
+
         # self.client.start_server_listenning()
     
     def working_worker(self):
         if(self.tabWidget.currentIndex() == 2):
             worker = Worker()
             self.pool.start(worker)
+
+
+# Media......................................................................................................................................................................
+    def slot_changed_media_output(self,new_index):
+        print("New index : " ,new_index)
+        self.client.set_sound_output(new_index)
+
+    def slot_mute(self):
+        self.client.set_sound_mute()
+
+    def slot_decrease_volume(self):
+        self.client.decrease_sound_volume()
+
+# ...........................................................................................................................................................................
 
 class Worker(QtCore.QRunnable):
     def __init__(self):
