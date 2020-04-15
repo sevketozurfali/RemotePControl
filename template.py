@@ -167,6 +167,7 @@ class Ui_MainWindow(object):
         self.combi_sound_output.currentIndexChanged.connect(self.slot_changed_media_output)
         self.btn_volume_mute.clicked.connect(self.slot_mute)
         self.btn_volume_down.clicked.connect(self.slot_decrease_volume)
+        self.btn_volume_up.clicked.connect(self.slot_increase_volume)
 
         #......................................................................
         
@@ -224,6 +225,9 @@ class Ui_MainWindow(object):
 
     def slot_decrease_volume(self):
         self.client.decrease_sound_volume()
+
+    def slot_increase_volume(self):
+        self.client.increase_sound_volume()
 
 # ...........................................................................................................................................................................
 

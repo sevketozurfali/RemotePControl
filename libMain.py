@@ -35,8 +35,7 @@ class libMain:
     
     def set_sound_mute(self):
         self.device_list = self.pulse.sink_list()
-        print("selected device : ", self.selected_output_index)
-        print("mute : ", self.device_list[self.selected_output_index].mute)
+
         if int(self.device_list[self.selected_output_index].mute) == 1:
             self.pulse.mute(self.device_list[self.selected_output_index], False)
         else:
@@ -44,4 +43,8 @@ class libMain:
 
 
     def decrease_sound_volume(self):
-        print("input info : " , str(self.pulse.sink_input_info()))
+        self.pulse.volume_change_all_chans(self.device_list[self.selected_output_index], -0.01)
+        # self.pulse.volume_set(self.device_list[self.selected_output_index], 0.1)
+
+    def increase_sound_volume(self):
+        self.pulse.volume_change_all_chans(self.device_list[self.selected_output_index], +0.01)
