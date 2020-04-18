@@ -27,7 +27,7 @@
        <item row="1" column="0">
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="power_utilities">
           <attribute name="title">
@@ -64,6 +64,16 @@
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
+           <widget class="QWidget" name="f_bat_widget" native="true">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>20</y>
+              <width>251</width>
+              <height>161</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
           <widget class="QFrame" name="f_ram">
            <property name="geometry">

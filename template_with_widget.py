@@ -1,34 +1,17 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'template.ui'
+#
 # Created by: PyQt5 UI code generator 5.14.2
-# author : Sevket Ozurfali
-# Email : sevketozurfali@gmail.com
+#
+# WARNING! All changes made in this file will be lost!
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import *
-from PyQt5.QtChart import QChart, QChartView, QPieSeries, QPieSlice
-from PyQt5.QtGui import QPainter, QPen
-from PyQt5.QtCore import Qt
-import threading
-import libMain
-import sys
-
 
 
 class Ui_MainWindow(object):
-    # ...........................................................Edit..........................
-    def __init__(self):
-        super(Ui_MainWindow,self).__init__()
-        self.pool = QtCore.QThreadPool.globalInstance()
-        self.pool.setMaxThreadCount(3)
-        self.sound_output_indexes = []
-
-
-    # .........................................................................................
-
     def setupUi(self, MainWindow):
-        # .............................................................:edit...................
-        self.client = libMain.libMain()
-        # .....................................................................................
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1023, 477)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -50,9 +33,6 @@ class Ui_MainWindow(object):
         self.f_cpu.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.f_cpu.setFrameShadow(QtWidgets.QFrame.Raised)
         self.f_cpu.setObjectName("f_cpu")
-        self.lbl_cpu_api = QtWidgets.QLabel(self.f_cpu)
-        self.lbl_cpu_api.setGeometry(QtCore.QRect(10, 0, 291, 181))
-        self.lbl_cpu_api.setObjectName("lbl_cpu_api")
         self.f_battery = QtWidgets.QFrame(self.power_utilities)
         self.f_battery.setGeometry(QtCore.QRect(290, 90, 361, 261))
         self.f_battery.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -173,21 +153,6 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        #connections...........................................................
-        self.btn_play_pause.clicked.connect(self.working_worker)
-        self.tabWidget.currentChanged.connect(self.working_worker)
-        self.combi_sound_output.currentIndexChanged.connect(self.slot_changed_media_output)
-        self.btn_volume_mute.clicked.connect(self.client.set_sound_mute)
-        self.btn_volume_down.clicked.connect(self.client.decrease_sound_volume)
-        self.btn_volume_up.clicked.connect(self.client.increase_sound_volume)
-        self.btn_play_pause.clicked.connect(self.client.play_pause_sound)
-
-        self.actionExit.triggered.connect(self.close_all)
-        self.actionAbout.triggered.connect(self.client.get_core_temp)
-
-        #......................................................................
-        
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -200,7 +165,6 @@ class Ui_MainWindow(object):
         self.lbl_qr_code.setText(_translate("MainWindow", "QR Code is in here"))
         self.btn_refresh_server.setText(_translate("MainWindow", "Refresh"))
         self.lbl_password.setText(_translate("MainWindow", "Password"))
-        self.lbl_cpu_api.setText(_translate("MainWindow", "cpu utilization will be in here...."))
         self.btn_pc_shutdown.setText(_translate("MainWindow", "ShutDown"))
         self.btn_pc_reset.setText(_translate("MainWindow", "Reset"))
         self.btn_pc_suspend.setText(_translate("MainWindow", "Suspend"))
@@ -212,116 +176,12 @@ class Ui_MainWindow(object):
         self.actionAbout.setText(_translate("MainWindow", "About"))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
 
-#.....................................................Edit..........................................
-    def definitions(self,ui):
-        self.tabWidget.setTabText(0, "Power")
-        self.tabWidget.setTabText(1, "Media")
-        self.tabWidget.setTabText(2, "System")
-        self.ui = ui
-        self.initialization()
-        
-    def initialization(self):
-        for item in self.client.find_sound_devices():
-            self.combi_sound_output.addItem(item.description)
-            self.sound_output_indexes.append(item.index)
-
-        # self.client.start_server_listenning()
-    
-    def working_worker(self):
-        if(self.tabWidget.currentIndex() == 2):
-            worker = Worker()
-            self.pool.start(worker)
-
-
-# Media......................................................................................................................................................................
-    def slot_changed_media_output(self,new_index):
-        print("New index : " ,new_index)
-        self.client.set_sound_output(new_index)
-
-    
-
-# ...........................................................................................................................................................................
-
-# CPU-RAM-BATTERY............................................................................................................................................................
-    def cpu_ram_battery_api(self, current_ui):
-        print("cpu api clicked......")
-        self.worker_for_system = Worker_for_system(current_ui)
-        self.pool.start(self.worker_for_system)
-
-    def print_cpu_value(self, current_cpu_val):
-        print("print cpu : ", current_cpu_val)
-        self.lbl_cpu_api.setText("Current CPu : " + current_cpu_val)
-
-    def print_cpu_temp(self, current_cpu_temp):
-        print("cpu Temp : " + str(int(current_cpu_temp)))
-
-    # def get_cpu_temperatures(self):
-    #     self.temp_average = self.client.get_core_temp()
-    #     print("cpu temperatures : " + self.temp_average)
-
-# CHART......................................................................................................................................................................
-    def draw_pie_chart(self):
-        self.chart_element = QPieSeries()
-        self.chart_element.append("Free Space", 80)
-        self.chart_element.append("Non Free Space", 100)
-        self.chart_element.append("Swap", 150)
-
-        self.chart = QChart()
-        self.chart.addSeries(self.chart_element)
-        self.chart.setAnimationOptions(QChart.SeriesAnimations)
-        self.chart.setTitle("This is pie chart.")
-
-        
-
-        self.chartView = QChartView(self.chart)
-        self.chartView.setRenderHint(QPainter.Antialiasing)
-
-        # MainWindow.setCentralWidget(self.chartView)
-# ...........................................................................................................................................................................
-        
-# ...........................................................................................................................................................................
-    def print_cpu_frequency(self, cpu_frequencies):
-        self.lbl_cpu_api.setText("Current freq : " + str(cpu_frequencies[0]) + "\n min freq : " + str(cpu_frequencies[1]) + "\n max freq : " + str(cpu_frequencies[2]))
-
-# ...........................................................................................................................................................................
-    def close_all(self):
-        print("close action triggered.")
-
-class Worker(QtCore.QRunnable):
-    def __init__(self):
-        super(Worker, self).__init__()
-
-    def run(self):
-        server = libMain.libMain()
-        server.find_sound_devices()
-        server.start_server()
-        server.start_server_listenning()
-
-class Worker_for_system(QtCore.QRunnable):
-    def __init__(self, n_ui):
-        super(Worker_for_system, self).__init__()
-        self.n_ui = n_ui        
-
-    def run(self):
-        cpu_client = libMain.libMain()
-        while True:
-            cpu_val = cpu_client.get_cpu_percent()
-            cpu_frequency = cpu_client.get_cpu_frequency()
-            cpu_temp_average = cpu_client.get_core_temp()
-            self.n_ui.print_cpu_value(cpu_val)
-            self.n_ui.print_cpu_frequency(cpu_frequency)
-            self.n_ui.print_cpu_temp(cpu_temp_average)
-# ............................................................................................
 
 if __name__ == "__main__":
+    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    # .......................................................edit................................
-    ui.definitions(ui)
-    ui.cpu_ram_battery_api(ui)
-    ui.draw_pie_chart()
-    # ...........................................................................................
     MainWindow.show()
     sys.exit(app.exec_())
