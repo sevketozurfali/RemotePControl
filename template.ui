@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1023</width>
-    <height>477</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -24,7 +27,7 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
+       <item row="0" column="0">
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
           <number>0</number>
@@ -36,14 +39,14 @@
           <widget class="QFrame" name="f_cpu">
            <property name="geometry">
             <rect>
-             <x>0</x>
-             <y>90</y>
-             <width>281</width>
-             <height>261</height>
+             <x>150</x>
+             <y>0</y>
+             <width>1091</width>
+             <height>411</height>
             </rect>
            </property>
            <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
+            <enum>QFrame::NoFrame</enum>
            </property>
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
@@ -52,14 +55,14 @@
           <widget class="QFrame" name="f_battery">
            <property name="geometry">
             <rect>
-             <x>290</x>
-             <y>90</y>
-             <width>361</width>
-             <height>261</height>
+             <x>150</x>
+             <y>411</y>
+             <width>1091</width>
+             <height>181</height>
             </rect>
            </property>
            <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
+            <enum>QFrame::NoFrame</enum>
            </property>
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
@@ -67,7 +70,7 @@
            <widget class="QWidget" name="f_bat_widget" native="true">
             <property name="geometry">
              <rect>
-              <x>20</x>
+              <x>40</x>
               <y>20</y>
               <width>251</width>
               <height>161</height>
@@ -78,18 +81,60 @@
           <widget class="QFrame" name="f_ram">
            <property name="geometry">
             <rect>
-             <x>660</x>
-             <y>90</y>
-             <width>321</width>
-             <height>261</height>
+             <x>0</x>
+             <y>0</y>
+             <width>150</width>
+             <height>590</height>
             </rect>
            </property>
            <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
+            <enum>QFrame::NoFrame</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
+            <enum>QFrame::Sunken</enum>
            </property>
+           <property name="lineWidth">
+            <number>0</number>
+           </property>
+           <widget class="QProgressBar" name="ram_bar">
+            <property name="geometry">
+             <rect>
+              <x>40</x>
+              <y>140</y>
+              <width>71</width>
+              <height>285</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QProgressBar:vertical {
+border-radius: 3px;
+background: transparent;
+text-align: top;
+border-image: url(:/bg_ram/images/ram_bg.png);
+
+}
+QProgressBar::chunk:vertical {
+background-color: rgb(207, 192, 20);
+margin-top: 1px; /* space */
+height: 10px;
+margin-left: 13px;
+margin-right: 13px;
+margin-bottom: 2px;
+}</string>
+            </property>
+            <property name="value">
+             <number>100</number>
+            </property>
+            <property name="textVisible">
+             <bool>false</bool>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="format">
+             <string>%p%</string>
+            </property>
+           </widget>
           </widget>
          </widget>
          <widget class="QWidget" name="sound_utilities">
@@ -399,7 +444,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1023</width>
+     <width>1280</width>
      <height>25</height>
     </rect>
    </property>
@@ -425,6 +470,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource_file.qrc"/>
+ </resources>
  <connections/>
 </ui>

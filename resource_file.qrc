@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="bg_ram">
+    <file>images/ram_bg.png</file>
+  </qresource>
+</RCC>

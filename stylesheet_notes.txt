@@ -1,0 +1,214 @@
+background: qlineargradient(x1: 0, y1: 0.5, x2: 1, y2: 0.5, stop: 0 green, stop: 1 white);
+border: 1px solid gray;
+
+
+background-image: url(:/bg_ram/images/ram_bg.png);
+
+
+--------------------------------------------progressbar--------------------------------------------------------------
+QProgressBar:horizontal {
+border: 1px solid gray;
+border-radius: 3px;
+background: white;
+padding: 1px;
+}
+QProgressBar::chunk:horizontal {
+background: qlineargradient(x1: 0, y1: 0.5, x2: 1, y2: 0.5, stop: 0 green, stop: 1 white);
+}
+
+---------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------progressbar--------------------------------------------------------------
+QProgressBar:horizontal {
+border: 1px solid gray;
+border-radius: 3px;
+background: transparent;
+padding: 1px;
+text-align: right;
+margin-right: 4ex;
+}
+QProgressBar::chunk:horizontal {
+background: RGB(255,128,0);
+margin-right: 2px; /* space */
+width: 10px;
+}
+
+---------------------------------------------------------------------------------------------------------------------
+working
+    Button {
+        x : 500
+        y : 200
+        objectName : "firstbutton"
+        iconSource : "images/secondtab.png"
+
+        style: ButtonStyle {
+            background: Rectangle {
+                implicitWidth: 50
+                implicitHeight: 5
+                border.width: control.activeFocus ? 2 : 1
+                border.color: "transparent"
+                radius: 4
+                gradient: Gradient {
+                    GradientStop { position: 0 ; color: control.pressed ? "#888" : "transparent" }
+                    GradientStop { position: 1 ; color: control.pressed ? "#888" : "transparent" }
+                }
+            }
+        }
+    }
+
+------------------------------------------------------------------------------------------------------------------
+
+Item {
+        id: root
+        objectName : "butesting"
+        width: image.width
+        height: image.height
+
+        x:100
+        y : 200
+
+    
+        property alias imageSource: image.source
+        signal clicked()
+    
+        SystemPalette{
+            id: palette
+            colorGroup: SystemPalette.Active
+        }
+    
+        Rectangle {
+            id: background
+            anchors.fill: parent
+            color: touchArea.pressed ? palette.button : palette.highlight
+    
+            Image {
+                id: image
+                anchors.centerIn: parent
+                source: "images/firsttab.png"
+    
+                width: 200
+                height: 100
+                fillMode: Image.PreserveAspectFit
+    
+                MouseArea {
+                    id: touchArea
+                    anchors.fill: parent
+                    onClicked: {
+                        parent.clicked()
+                        if (root.enabled) {
+                            root.clicked();
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    Item {
+        x: 10; y: 140; width: parent.width-20; height: 48;
+        BorderImage {
+            anchors.fill: parent;
+            source: "images/button_released.sci";
+            opacity: region.pressed? 0: 1
+        }
+        BorderImage {
+            anchors.fill: parent;
+            source: "images/button_pressed.sci";
+            opacity: region.pressed? 1: 0
+        }
+    }
+
+
+
+
+    Item{
+        signal testbutton
+        id : bu
+        objectName : "butest"
+        y : 70
+        BorderImage{
+            source : "images/firsttab.png";
+        }
+        
+    }
+
+
+
+
+
+
+
+
+
+    Rectangle {
+        anchors { fill: parent; margins: 1 }
+        color: mouseArea.pressed ? bgColorSelected : bgColor
+
+        Text {
+            id: text
+            clip: true
+            text: root.text
+            anchors { fill: parent; margins: scaledMargin }
+            font.pixelSize: fontSize
+            color: textColor
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            onClicked: {
+                root.clicked()
+            }
+            enabled: active
+        }
+    }
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+Gauge
+
+CircularGauge {
+                style: CircularGaugeStyle {
+                    needle: Rectangle {
+                        y: outerRadius * 0.15
+                        implicitWidth: outerRadius * 0.03
+                        implicitHeight: outerRadius * 0.9
+                        antialiasing: true
+                        color: Qt.rgba(0.66, 0.3, 0, 1)
+                    }
+                }
+            }
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+  CircularGauge {
+      id : gauge
+      x: 150
+      y: 100
+      value: accelerating ? maximumValue : 0
+      anchors.centerIn: parent
+
+      property bool accelerating: false
+
+      Keys.onSpacePressed: accelerating = true
+      Keys.onReleased: {
+          if (event.key === Qt.Key_Space) {
+              accelerating = false;
+              event.accepted = true;
+          }
+      }
+
+      Component.onCompleted: forceActiveFocus()
+
+      Behavior on value {
+          NumberAnimation {
+              duration: 1000
+          }
+      }
+  }
